@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     
     try {
       // Quick check if profile exists
-      const { data: existingProfile, error: checkError } = await supabase
+      const { error: checkError } = await supabase
         .from(TABLES.USERS)
         .select('id')
         .eq('id', user.id)

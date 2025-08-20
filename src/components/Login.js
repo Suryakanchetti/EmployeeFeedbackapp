@@ -108,11 +108,7 @@ const Login = () => {
     transition: 'background-color 0.2s'
   };
 
-  const buttonDisabledStyle = {
-    ...buttonStyle,
-    background: '#9ca3af',
-    cursor: 'not-allowed'
-  };
+
 
   const buttonLoadingStyle = {
     ...buttonStyle,

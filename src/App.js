@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import FeedbackForm from './components/FeedbackForm';
 import FeedbackList from './components/FeedbackList';
 import Profile from './components/Profile';
 import AdminPanel from './components/AdminPanel';

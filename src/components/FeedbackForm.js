@@ -193,11 +193,7 @@ const FeedbackForm = () => {
     border: '1px solid #fecaca'
   };
 
-  const priorityColors = {
-    low: '#10b981',
-    medium: '#f59e0b',
-    high: '#ef4444'
-  };
+
 
   return (
     <div style={containerStyle}>

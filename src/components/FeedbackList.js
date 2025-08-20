@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import { supabase, TABLES, FEEDBACK_TYPES, FEEDBACK_STATUS } from '../supabase';
 
 const FeedbackList = () => {
-  const { user } = useAuth();
   const [feedback, setFeedback] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
 
-  useEffect(() => {
-    fetchFeedback();
-  }, []);
-
-  const fetchFeedback = async () => {
+  const fetchFeedback = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -50,7 +44,11 @@ const FeedbackList = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchFeedback();
+  }, [fetchFeedback]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -170,14 +168,13 @@ const FeedbackList = () => {
   const filterButtonStyle = (active) => ({
     padding: '8px 16px',
     borderRadius: '6px',
-    border: 'none',
+    border: active ? 'none' : '1px solid #d1d5db',
     cursor: 'pointer',
     fontSize: '14px',
     fontWeight: '500',
     transition: 'all 0.2s',
     background: active ? '#2563eb' : 'transparent',
-    color: active ? 'white' : '#6b7280',
-    border: active ? 'none' : '1px solid #d1d5db'
+    color: active ? 'white' : '#6b7280'
   });
 
   const buttonStyle = {
