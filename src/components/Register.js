@@ -219,36 +219,38 @@ const Register = () => {
             </div>
           )}
           
-          <div style={formGroupStyle}>
-            <label style={labelStyle}>First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
-              placeholder="Enter your first name"
-              required
-              disabled={loading}
-              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
-              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
-            />
-          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div style={formGroupStyle}>
+              <label style={labelStyle}>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
+                placeholder="first name"
+                required
+                disabled={loading}
+                onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+                onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
+              />
+            </div>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle}>Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
-              placeholder="Enter your last name"
-              required
-              disabled={loading}
-              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
-              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
-            />
+            <div style={formGroupStyle}>
+              <label style={labelStyle}>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
+                placeholder="last name"
+                required
+                disabled={loading}
+                onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+                onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
+              />
+            </div>
           </div>
           
           <div style={formGroupStyle}>
@@ -259,7 +261,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
-              placeholder="Enter your email"
+              placeholder="email"
               required
               disabled={loading}
               onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
@@ -267,36 +269,38 @@ const Register = () => {
             />
           </div>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle}>Department</label>
-            <input
-              type="text"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
-              placeholder="Enter your department"
-              required
-              disabled={loading}
-              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
-              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
-            />
-          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div style={formGroupStyle}>
+              <label style={labelStyle}>Department</label>
+              <input
+                type="text"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+                style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
+                placeholder="department"
+                required
+                disabled={loading}
+                onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+                onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
+              />
+            </div>
 
-          <div style={formGroupStyle}>
-            <label style={labelStyle}>Position</label>
-            <input
-              type="text"
-              name="position"
-              value={formData.position}
-              onChange={handleChange}
-              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
-              placeholder="Enter your position"
-              required
-              disabled={loading}
-              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
-              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
-            />
+            <div style={formGroupStyle}>
+              <label style={labelStyle}>Position</label>
+              <input
+                type="text"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
+                placeholder="position"
+                required
+                disabled={loading}
+                onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+                onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
+              />
+            </div>
           </div>
           
           <div style={formGroupStyle}>
