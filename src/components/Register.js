@@ -46,6 +46,9 @@ const Register = () => {
       setError('');
       setLoading(true);
       
+      console.log('🔄 Starting sign up...');
+      const startTime = Date.now();
+      
       const userData = {
         first_name: formData.firstName,
         last_name: formData.lastName,
@@ -55,12 +58,17 @@ const Register = () => {
 
       const { error } = await signUp(formData.email, formData.password, userData);
       
+      const endTime = Date.now();
+      console.log(`⏱️ Sign up took: ${endTime - startTime}ms`);
+      
       if (error) {
         setError(error.message);
       } else {
+        console.log('✅ Sign up successful, redirecting...');
         navigate('/');
       }
     } catch (error) {
+      console.error('❌ Sign up error:', error);
       setError('Failed to create account');
     } finally {
       setLoading(false);
@@ -94,7 +102,8 @@ const Register = () => {
     background: 'white',
     padding: '30px',
     borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+    transition: 'all 0.3s ease'
   };
 
   const formGroupStyle = {
@@ -114,7 +123,24 @@ const Register = () => {
     border: '2px solid #e5e7eb',
     borderRadius: '6px',
     fontSize: '16px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transition: 'border-color 0.2s, opacity 0.2s'
+  };
+
+  const inputFocusStyle = {
+    ...inputStyle,
+    border: '2px solid #2563eb',
+    outline: 'none'
+  };
+
+  const inputErrorStyle = {
+    ...inputStyle,
+    border: '2px solid #dc2626'
+  };
+
+  const inputSuccessStyle = {
+    ...inputStyle,
+    border: '2px solid #059669'
   };
 
   const buttonStyle = {
@@ -128,7 +154,7 @@ const Register = () => {
     fontWeight: '600',
     cursor: 'pointer',
     marginBottom: '20px',
-    transition: 'background-color 0.2s'
+    transition: 'background-color 0.2s, transform 0.1s'
   };
 
   const buttonLoadingStyle = {
@@ -149,7 +175,8 @@ const Register = () => {
   const linkStyle = {
     color: '#2563eb',
     textDecoration: 'none',
-    fontWeight: '600'
+    fontWeight: '600',
+    transition: 'color 0.2s'
   };
 
   const textCenterStyle = {
@@ -173,6 +200,10 @@ const Register = () => {
     animation: 'spin 1s linear infinite'
   };
 
+  // Get password match status for visual feedback
+  const isPasswordMatch = formData.password === formData.confirmPassword && formData.confirmPassword !== '';
+  const isPasswordValid = formData.password.length >= 6;
+
   return (
     <div style={containerStyle}>
       <div style={headerStyle}>
@@ -195,10 +226,12 @@ const Register = () => {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
               placeholder="Enter your first name"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
             />
           </div>
 
@@ -209,10 +242,12 @@ const Register = () => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
               placeholder="Enter your last name"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
             />
           </div>
           
@@ -223,10 +258,12 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
               placeholder="Enter your email"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
             />
           </div>
 
@@ -237,10 +274,12 @@ const Register = () => {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
               placeholder="Enter your department"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
             />
           </div>
 
@@ -251,10 +290,12 @@ const Register = () => {
               name="position"
               value={formData.position}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : inputStyle}
               placeholder="Enter your position"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = '2px solid #e5e7eb'}
             />
           </div>
           
@@ -265,11 +306,23 @@ const Register = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : (isPasswordValid ? inputSuccessStyle : inputStyle)}
               placeholder="Create a password"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = isPasswordValid ? '2px solid #059669' : '2px solid #e5e7eb'}
             />
+            {formData.password && (
+              <small style={{ 
+                color: isPasswordValid ? '#059669' : '#dc2626', 
+                fontSize: '12px', 
+                marginTop: '4px',
+                display: 'block'
+              }}>
+                {isPasswordValid ? '✓ Password meets requirements' : 'Password must be at least 6 characters'}
+              </small>
+            )}
           </div>
 
           <div style={formGroupStyle}>
@@ -279,17 +332,33 @@ const Register = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              style={inputStyle}
+              style={loading ? { ...inputStyle, opacity: 0.6 } : (isPasswordMatch ? inputSuccessStyle : inputStyle)}
               placeholder="Confirm your password"
               required
               disabled={loading}
+              onFocus={(e) => e.target.style.border = '2px solid #2563eb'}
+              onBlur={(e) => e.target.style.border = isPasswordMatch ? '2px solid #059669' : '2px solid #e5e7eb'}
             />
+            {formData.confirmPassword && (
+              <small style={{ 
+                color: isPasswordMatch ? '#059669' : '#dc2626', 
+                fontSize: '12px', 
+                marginTop: '4px',
+                display: 'block'
+              }}>
+                {isPasswordMatch ? '✓ Passwords match' : 'Passwords do not match'}
+              </small>
+            )}
           </div>
 
           <button
             type="submit"
             disabled={loading}
             style={loading ? buttonLoadingStyle : buttonStyle}
+            onMouseEnter={(e) => !loading && (e.target.style.background = '#1d4ed8')}
+            onMouseLeave={(e) => !loading && (e.target.style.background = '#2563eb')}
+            onMouseDown={(e) => !loading && (e.target.style.transform = 'scale(0.98)')}
+            onMouseUp={(e) => !loading && (e.target.style.transform = 'scale(1)')}
           >
             {loading ? (
               <div style={loadingTextStyle}>
@@ -304,7 +373,12 @@ const Register = () => {
           <div style={textCenterStyle}>
             <p>
               Already have an account?{' '}
-              <Link to="/login" style={linkStyle}>
+              <Link 
+                to="/login" 
+                style={linkStyle}
+                onMouseEnter={(e) => e.target.style.color = '#1d4ed8'}
+                onMouseLeave={(e) => e.target.style.color = '#2563eb'}
+              >
                 Sign in here
               </Link>
             </p>
