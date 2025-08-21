@@ -127,16 +127,7 @@ const Register = () => {
     transition: 'border-color 0.2s, opacity 0.2s'
   };
 
-  const inputFocusStyle = {
-    ...inputStyle,
-    border: '2px solid #2563eb',
-    outline: 'none'
-  };
 
-  const inputErrorStyle = {
-    ...inputStyle,
-    border: '2px solid #dc2626'
-  };
 
   const inputSuccessStyle = {
     ...inputStyle,
